@@ -1,0 +1,38 @@
+.sidebar .sidebar-section {
+    min-height: 48px;
+    max-height: 48px;
+    height: 48px;
+}
+
+.sidebar .sidebar-section:focus {
+    border: 0;
+}
+
+.sidebar .sidebar-section .section-label {
+    font-size: 10pt;
+}
+
+.sidebar .sidebar-section .section-icon {
+    margin-right: 8px;
+}
+
+.sidebar .sidebar-section.active {
+    background-color: #151515;
+}
+
+.sidebar .sidebar-section.active .section-label {
+    color: #fff;
+}
+
+.sidebar .sidebar-section.active .section-icon {
+    background-color: #fff;
+}
+
+.main {
+    padding: 16px;
+}
+
+.main input:checked, .check-circle, .check-square {
+    background-color: #fff !important;
+    border-color: #fff !important;
+}

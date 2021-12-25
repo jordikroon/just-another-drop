@@ -1,0 +1,21 @@
+{
+  "name": "drop-v3",
+  "version": "0.0.0",
+  "description": "Drop-v3",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron . --disable-gpu --disable-d3d11"
+  },
+  "author": {
+    "name": "Jordi Kroon"
+  },
+  "devDependencies": {
+    "electron": "^16.0.5"
+  },
+  "dependencies": {
+    "custom-electron-prompt": "^1.4.0",
+    "electron-preferences": "^2.5.0",
+    "menubar": "^9.1.1",
+    "sharp": "^0.29.3"
+  }
+}
