@@ -29,6 +29,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="build\entitlements.mac.plist">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="build\notarize.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="resources\icons\icon%402x.png" />
@@ -41,6 +47,9 @@
     <Content Include="src\binder\clipboardBinder.js" />
     <Content Include="src\binder\seperatorBinder.js" />
     <Content Include="src\binder\screenshotBinder.js" />
+    <Content Include="src\binder\updateBinder.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\config\preferences.js" />
     <Content Include="src\helpers\path.js" />
     <Content Include="src\initializers\note.js" />
@@ -536,6 +545,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="build\" />
     <Folder Include="src\" />
     <Folder Include="resources\" />
     <Folder Include="resources\icons\" />

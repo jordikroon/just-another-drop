@@ -7,6 +7,7 @@ const notesBinder = {
     identifier: 'note',
     name: 'Note',
     defaultKeyBind: Preferences.value('bindings.notes'),
+    enabled: true,
     onActivate: async (app, windowManager) => {
         await new Note(app, windowManager).initialize();
     },

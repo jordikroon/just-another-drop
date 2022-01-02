@@ -1,26 +1,38 @@
 {
-  "name": "drop-v3",
-  "version": "0.0.0",
+  "name": "just-another-drop",
+  "version": "1.0.0",
   "description": "Drop-v3",
   "main": "app.js",
   "build": {
-    "appId": "Just Another Drop"
+    "appId": "Just Another Drop",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "jordikroon",
+        "repo": "just-another-drop"
+      }
+    ]
   },
   "scripts": {
-    "start": "electron --disable-gpu --disable-d3d11 ."
+    "start": "electron --disable-gpu --disable-d3d11 .",
+    "publish": "electron-builder -p always"
   },
   "author": {
     "name": "Jordi Kroon"
   },
   "devDependencies": {
-    "electron": "^16.0.5"
+    "electron": "^16.0.5",
+    "electron-builder": "^22.11.7",
+    "electron-notarize": "^1.1.1"
   },
   "dependencies": {
     "@electron/remote": "^2.0.1",
     "auto-launch": "^5.0.5",
     "aws-sdk": "^2.1048.0",
     "custom-electron-prompt": "^1.4.0",
+    "electron-log": "^4.4.4",
     "electron-preferences": "^2.3.2",
+    "electron-updater": "^4.3.9",
     "form-data": "^4.0.0",
     "github-api": "^3.4.0",
     "got": "^12.0.0",

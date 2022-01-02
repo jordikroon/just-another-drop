@@ -6,6 +6,7 @@ const clipboardBinder = {
     identifier: 'clipboard',
     name: 'Clipboard',
     defaultKeyBind: Preferences.value('bindings.clipboard'),
+    enabled: true,
     onActivate: async (app, windowManager) => {
         await new Screenshot(app, windowManager).makeFromClipboard();
     },

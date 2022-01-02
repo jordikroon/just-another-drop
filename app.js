@@ -2,12 +2,17 @@
 
 const { app, BrowserWindow, globalShortcut } = require('electron');
 const AutoLaunch = require('auto-launch');
+const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
 
 const Context = require('./src/initializers/context');
 const Keybind = require('./src/initializers/keybind');
 const WindowManager = require('./src/initializers/windowManager');
 const binders = require('./src/binder/index');
 const Preferences = require('./src/config/preferences');
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'debug';
 
 const instanceLock = app.requestSingleInstanceLock();
 if (!instanceLock) {
@@ -21,6 +26,9 @@ const autoLauncher = new AutoLaunch({
 app.setAppUserModelId('Just Another Drop');
 
 app.whenReady().then(() => {
+    app.updateCheckState = 'latest';
+
+    autoUpdater.checkForUpdatesAndNotify();
 
     const windowManager = new WindowManager();
     const baseWindow = new BrowserWindow({ show: false });
@@ -37,6 +45,25 @@ app.whenReady().then(() => {
         context.build(binders);
         keybind.register(binders);
         registerAutoStart();
+    });
+
+    autoUpdater.on('checking-for-update', () => {
+        app.updateCheckState = 'check';
+        context.build(binders);
+    });
+
+    autoUpdater.on('update-available', (info) => {
+        app.updateCheckState = 'available';
+        context.build(binders);
+    })
+    autoUpdater.on('update-not-available', (info) => {
+        app.updateCheckState = 'latest';
+        context.build(binders);
+    })
+
+    autoUpdater.on('update-downloaded', () => {
+        app.updateCheckState = 'available';
+        context.build(binders);
     });
 
     context.build(binders);

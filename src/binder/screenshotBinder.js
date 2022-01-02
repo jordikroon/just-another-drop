@@ -7,6 +7,7 @@ const screenshotBinder = {
     identifier: 'screenshot',
     name: 'Screenshot',
     defaultKeyBind: Preferences.value('bindings.screenshot'),
+    enabled: true,
     onActivate: (app, windowManager) => {
         new Screenshot(app, windowManager).makeFromDesktop();
     },

@@ -11,6 +11,7 @@ module.exports = [
     require('./seperatorBinder'),
 
     require('./settingsBinder'),
+    require('./updateBinder'),
 
     require('./seperatorBinder'),
 
