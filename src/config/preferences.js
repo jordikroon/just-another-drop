@@ -22,7 +22,6 @@ const Preferences = new ElectronPreferences({
 			awsAccessKeyId: null,
 			awsSecretAccessKey: null,
 			awsS3Bucket: null,
-			awsDefaultRegion: null,
 			awsBaseUrl: null,
 			restUploadPath: null,
         }
@@ -90,13 +89,8 @@ const Preferences = new ElectronPreferences({
 								type: 'text',
 							},
 							{
-								label: 'AWS Default Region',
-								key: 'awsDefaultRegion',
-								type: 'text',
-							},
-							{
 								label: 'Base URL',
-								key: 'awsBaseUrl',
+								key: ' ',
 								type: 'text',
 							},
 						]

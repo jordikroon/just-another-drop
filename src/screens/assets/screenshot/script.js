@@ -1,17 +1,9 @@
 const { ipcRenderer } = require('electron');
 const CHANNEL_NAME = 'screenshot';
+const image = new Image();
 let locationStart = { x: 0, y: 0 };
 let locationEnd = { x: 0, y: 0 };
 let isDrawing = false;
-let image = new Image();
-
-function getMousePos(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-    };
-}
 
 function init(imageBlob) {
     const canvas = document.createElement('canvas');
@@ -78,10 +70,18 @@ function onDrawRect(event, canvas, context, eventType) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(image, 0, 0);
 
-    context.fillStyle = 'rgba(255, 255, 255, 0.2)';
-    context.strokeStyle = 'rgba(255, 255, 255, 1)';
+    context.fillStyle = 'rgba(214, 237, 255, 0.2)';
+    context.strokeStyle = 'rgba(214, 237, 255, 1)';
     context.lineWidth = 1;
     context.rect(locationStart.x, locationStart.y, locationEnd.x - locationStart.x, locationEnd.y - locationStart.y);
     context.fill();
     context.stroke();
+}
+
+function getMousePos(canvas, event) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
 }
