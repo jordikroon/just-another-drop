@@ -21,7 +21,6 @@ const autoLauncher = new AutoLaunch({
 app.setAppUserModelId('Just Another Drop');
 
 app.whenReady().then(() => {
-    registerAutoStart();
 
     const windowManager = new WindowManager();
     const baseWindow = new BrowserWindow({ show: false });
@@ -42,6 +41,7 @@ app.whenReady().then(() => {
 
     context.build(binders);
     keybind.register(binders);
+    registerAutoStart();
 });
 
 app.on('will-quit', () => {
