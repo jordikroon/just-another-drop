@@ -52,7 +52,6 @@ async function registerAutoStart() {
     try {
         const isEnabled = await autoLauncher.isEnabled();
         if (!isEnabled && Preferences.value('general.autostart')) {
-            console.log('Marked enabled');
             autoLauncher.enable();
         }
 
