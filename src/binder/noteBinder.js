@@ -1,14 +1,14 @@
 'use strict';
 
 const Preferences = require('../config/preferences');
-const Screenshot = require('../initializers/screenshot');
+const Note = require('../initializers/note');
 
 const notesBinder = {
     identifier: 'note',
     name: 'Note',
     defaultKeyBind: Preferences.value('bindings.notes'),
     onActivate: async (app, windowManager) => {
-        await new Screenshot(app, windowManager).makeFromDesktop();
+        await new Note(app, windowManager).initialize();
     },
 };
 

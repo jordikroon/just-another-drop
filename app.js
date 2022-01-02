@@ -1,11 +1,18 @@
 'use strict';
 
-const { app, BrowserWindow, globalShortcut } = require('electron');
+import { app, BrowserWindow, globalShortcut } from 'electron';
 
-const Context = require('./src/initializers/context');
-const Keybind = require('./src/initializers/keybind');
-const WindowManager = require('./src/initializers/windowManager');
-const binders = require('./src/binder/index');
+import Context from './src/initializers/context';
+import Keybind from'./src/initializers/keybind';
+import WindowManager from './src/initializers/windowManager';
+import binders from './src/binder/index';
+
+const instanceLock = app.requestSingleInstanceLock();
+if (!instanceLock) {
+    app.quit();
+}
+
+app.setAppUserModelId('Just Another Drop');
 
 app.whenReady().then(() => {
     const windowManager = new WindowManager();

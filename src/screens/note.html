@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Note</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/note/style.css">
+</head>
+<body>
+    <header id="titlebar">
+        <div id="drag-region">
+            <div class="form" draggable="false">
+                <input type="text" value="Filename.txt" />
+                <button disabled>Upload</button>
+            </div>
+            <div id="window-controls">
+                <div class="button" id="min-button">
+                    <img class="icon" srcset="assets/icons/min-w-10.png 1x, assets/icons/min-w-12.png 1.25x, assets/icons/min-w-15.png 1.5x, assets/icons/min-w-15.png 1.75x, assets/icons/min-w-20.png 2x, assets/icons/min-w-20.png 2.25x, assets/icons/min-w-24.png 2.5x, assets/icons/min-w-30.png 3x, assets/icons/min-w-30.png 3.5x" draggable="false" />
+                </div>
+
+                <div class="button" id="max-button">
+                    <img class="icon" srcset="assets/icons/max-w-10.png 1x, assets/icons/max-w-12.png 1.25x, assets/icons/max-w-15.png 1.5x, assets/icons/max-w-15.png 1.75x, assets/icons/max-w-20.png 2x, assets/icons/max-w-20.png 2.25x, assets/icons/max-w-24.png 2.5x, assets/icons/max-w-30.png 3x, assets/icons/max-w-30.png 3.5x" draggable="false" />
+                </div>
+
+                <div class="button" id="restore-button">
+                    <img class="icon" srcset="assets/icons/restore-w-10.png 1x, assets/icons/restore-w-12.png 1.25x, assets/icons/restore-w-15.png 1.5x, assets/icons/restore-w-15.png 1.75x, assets/icons/restore-w-20.png 2x, assets/icons/restore-w-20.png 2.25x, assets/icons/restore-w-24.png 2.5x, assets/icons/restore-w-30.png 3x, assets/icons/restore-w-30.png 3.5x" draggable="false" />
+                </div>
+
+                <div class="button" id="close-button">
+                    <img class="icon" srcset="assets/icons/close-w-10.png 1x, assets/icons/close-w-12.png 1.25x, assets/icons/close-w-15.png 1.5x, assets/icons/close-w-15.png 1.75x, assets/icons/close-w-20.png 2x, assets/icons/close-w-20.png 2.25x, assets/icons/close-w-24.png 2.5x, assets/icons/close-w-30.png 3x, assets/icons/close-w-30.png 3.5x" draggable="false" />
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div id="main">
+        <div id="editor"></div>
+    </div>
+
+    <script src="assets/note/editor/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/note/editor/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/note/editor/ext-modelist.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/note/script.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

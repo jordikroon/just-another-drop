@@ -7,11 +7,10 @@ class Context {
     constructor(app, windowManager) {
         this.app = app;
         this.windowManager = windowManager;
-        this.tray = null;
+        this.tray = new Tray(getFilePath(process.cwd(), 'resources', 'icons', 'icon.png'));
     }
 
     build(binders) {
-        this.tray = new Tray(getFilePath(process.cwd(), 'resources', 'icons', 'icon.png'));
         const contextMenu = Menu.buildFromTemplate(
             binders.map((binder) => {
                 return {

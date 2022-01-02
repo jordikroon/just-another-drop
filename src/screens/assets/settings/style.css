@@ -36,3 +36,7 @@
     background-color: #fff !important;
     border-color: #fff !important;
 }
+
+.group:not(:first-child) {
+    margin-top: 24px;
+}

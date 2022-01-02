@@ -1,7 +1,12 @@
 'use strict';
 
 const { BrowserWindow, globalShortcut, desktopCapturer, screen, ipcMain } = require('electron');
-const IPC_CHANNEL_NAME = 'main';
+const sharp = require('sharp');
+const FormData = require('form-data');
+const { Readable } = require('stream');
+
+// TODO: https://stackoverflow.com/questions/63644840/electron-upload-with-progress
+const IPC_CHANNEL_NAME = 'screenshot';
 
 class Screenshot {
     constructor(app, windowManager) {
@@ -10,14 +15,16 @@ class Screenshot {
         this.eventsConfigured = false;
         this.screenshotMap = [];
         this.app = app;
-        this.onScreenshotTaken = null;
+        this.generatingScreenshotForScreen = null;
+
     }
 
     makeFromDesktop(onScreenshotTaken) {
-        this.onScreenshotTaken = onScreenshotTaken;
+        const { getCursorScreenPoint, getDisplayNearestPoint } = screen
+        this.generatingScreenshotForScreen = getDisplayNearestPoint(getCursorScreenPoint())
+        const { width, height } = this.generatingScreenshotForScreen.size;
 
         this._fullscreenScreenshot(() => {
-            const { width, height } = screen.getPrimaryDisplay().workAreaSize;
             this.screenshotWindow = new BrowserWindow({
                 width,
                 height,
@@ -27,13 +34,15 @@ class Screenshot {
                 frame: false,
                 skipTaskbar: true,
                 transparent: true,
-                show: true,
+                show: false,
                 backgroundColor: '#2e2c29',
                 webPreferences: {
                     nodeIntegration: true,
                     contextIsolation: false,
                 }
             });
+
+            this.screenshotWindow.webContents.openDevTools();
             this.screenshotWindow.loadURL(`file://${__dirname}/../screens/screenshot.html`);
             this.screenshotWindow.on('ready-to-show', () => {
                 this.screenshotWindow.webContents.executeJavaScript(
@@ -54,10 +63,12 @@ class Screenshot {
     }
 
     _fullscreenScreenshot(callback) {
+        const { width, height } = this.generatingScreenshotForScreen.size;
+
         const screenshotMap = {};
         desktopCapturer.getSources({
             types: ['screen'],
-            thumbnailSize: { width: 3440, height: 1440 }
+            thumbnailSize: { width: width, height: height }
         }).then(sources => {
             for (const source of sources) {
                 if (source.display_id) {
@@ -114,11 +125,32 @@ class Screenshot {
         if (data.event === 'screenshot_finish') {
            this._closeWindow();
 
-            this.onScreenshotTaken(
-                this.screenshotMap['Entire Screen'].replace('data:image/png;base64,', ''),
-                data.data,
+            this._onScreenshotTaken(
+                data.data.image.replace('data:image/png;base64,', ''),
+                data.data.dimensions,
             );
         }
+    }
+
+    async _onScreenshotTaken(image, slice) {
+        let imageBuffer = Buffer.from(image, 'base64');
+
+        if (slice) {
+            imageBuffer = await sharp(imageBuffer).extract(slice).toBuffer()
+        }
+
+        await this._uploadToRest(imageBuffer);
+    }
+
+    async _uploadToRest(imageBuffer) {
+        const formData = new FormData();
+        const stream = new Readable({
+            read() {
+                this.push(imageBuffer);
+            },
+        })
+
+        formData.append('file', stream, 'screenshot.jpg');
     }
 }
 
