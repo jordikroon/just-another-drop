@@ -90,7 +90,7 @@ const Preferences = new ElectronPreferences({
 							},
 							{
 								label: 'Base URL',
-								key: ' ',
+								key: 'awsBaseUrl',
 								type: 'text',
 							},
 						]
