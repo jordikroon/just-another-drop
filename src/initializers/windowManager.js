@@ -1,6 +1,5 @@
 'use strict';
 
-
 class WindowManager {
     constructor() {
         this.windows = new Set();
