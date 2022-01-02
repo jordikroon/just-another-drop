@@ -1,6 +1,6 @@
 {
   "name": "just-another-drop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Drop-v3",
   "main": "app.js",
   "build": {
