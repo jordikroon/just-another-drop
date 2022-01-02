@@ -12,7 +12,7 @@ const binders = require('./src/binder/index');
 const Preferences = require('./src/config/preferences');
 
 autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'debug';
+autoUpdater.logger.transports.file.level = 'info';
 
 const instanceLock = app.requestSingleInstanceLock();
 if (!instanceLock) {
@@ -86,6 +86,7 @@ async function registerAutoStart() {
             autoLauncher.disable();
         }
     } catch (error) {
+    console.log(error);
         return;
     }
 }
