@@ -7,7 +7,7 @@ class Context {
     constructor(app, windowManager) {
         this.app = app;
         this.windowManager = windowManager;
-        this.tray = new Tray(getFilePath(__dirname, 'resources', 'icons', 'icon.png'));
+        this.tray = new Tray(getFilePath(__dirname, '..', '..', 'resources', 'icons', 'icon.png'));
     }
 
     build(binders) {
