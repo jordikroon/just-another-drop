@@ -11,6 +11,9 @@ const WindowManager = require('./src/initializers/windowManager');
 const binders = require('./src/binder/index');
 const Preferences = require('./src/config/preferences');
 
+const unhandled = require('electron-unhandled');
+unhandled();
+
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 
